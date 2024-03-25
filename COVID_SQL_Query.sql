@@ -59,7 +59,8 @@ ORDER BY 1,2
 
 --Looking at Total population vs Vaccination
 
-select dea.continent,dea.location, dea.date, dea.population, vac.new_vaccinations
+select dea.continent,dea.location, dea.date, dea.population, vac.new_vaccinations,
+   sum (cast ( vac.new_vaccinations as int))over (partition by dea.location order by dea.location, dea.date)
 from PortfolioProject..CovidDeaths    dea   --dea is the class of CovidDeath
 join PortfolioProject..CovidVaccinations     vac --vac is the class of CovidVaccination
    On dea.location=vac.location
