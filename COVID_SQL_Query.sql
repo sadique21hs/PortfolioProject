@@ -85,3 +85,20 @@ where dea.continent is not null
 )
 select*,(RollingPeopleVaccination/population)*100 
 from popvsvac
+
+
+
+
+
+--TEMP TABLE
+
+Drop table if exists #PercentPOpulationVaccinated
+Create Table #PercentPOpulationVaccinated
+(
+Continent nvarchar(255),
+location nvarchar(255),
+date datetime,
+population numeric ,
+new_vaccinations numeric,
+RollingPeopleVaccination numeric
+)
