@@ -121,7 +121,7 @@ from #PercentPOpulationVaccinated
 
 --creating view to store data for visualization
 
-Create view PercentPOpulationVaccinated as
+Create view PercentPopulationVaccinated as
 select dea.continent,dea.location, dea.date, dea.population, vac.new_vaccinations ,
  sum (cast ( vac.new_vaccinations as int))over (partition by dea.location order by dea.location, 
  dea.date) as RollingPeopleVaccination
@@ -131,3 +131,7 @@ join PortfolioProject..CovidVaccinations     vac --vac is the class of CovidVacc
    and dea.date=vac.date
 where dea.continent is not null
 --ORDER BY 2,3
+
+
+select*
+from dbo.PercentPopulationVaccinated
