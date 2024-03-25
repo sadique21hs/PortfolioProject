@@ -70,3 +70,18 @@ where dea.continent is not null
 ORDER BY 2,3
 
 --------------------------------------------------------------------
+--USE CTE
+with popvsvac(continent,location,date,population,new_vaccination,RollingPeopleVaccination)
+as(
+select dea.continent,dea.location, dea.date, dea.population, vac.new_vaccinations ,
+ sum (cast ( vac.new_vaccinations as int))over (partition by dea.location order by dea.location, 
+ dea.date) as RollingPeopleVaccination
+from PortfolioProject..CovidDeaths    dea   --dea is the class of CovidDeath
+join PortfolioProject..CovidVaccinations     vac --vac is the class of CovidVaccination
+   On dea.location=vac.location
+   and dea.date=vac.date
+where dea.continent is not null
+--ORDER BY 2,3
+)
+select*,(RollingPeopleVaccination/population)*100 
+from popvsvac
