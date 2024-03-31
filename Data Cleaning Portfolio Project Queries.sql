@@ -14,3 +14,12 @@ Add SaleDateCoverted date;
 
 Update NashvilleHousing
 Set SaleDateCoverted = Convert(Date,saledate)
+
+
+  
+--Proparty address data
+
+select *
+from PortfolioProject..NashvilleHousing
+--Where PropertyAddress is null
+Order by ParcelID
