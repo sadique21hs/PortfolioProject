@@ -24,8 +24,16 @@ from PortfolioProject..NashvilleHousing
 --Where PropertyAddress is null
 Order by ParcelID
 
-
 select a.ParcelID, a.PropertyAddress, b.ParcelID,b.PropertyAddress, isnull( a.PropertyAddress,b.PropertyAddress)
+from PortfolioProject..NashvilleHousing a
+join PortfolioProject..NashvilleHousing b
+  on a.ParcelID=b.ParcelID
+  and a.[UniqueID ]<>b.[UniqueID ]
+  where a.PropertyAddress is null
+
+
+Update a
+Set PropertyAddress=isnull( a.PropertyAddress,b.PropertyAddress)
 from PortfolioProject..NashvilleHousing a
 join PortfolioProject..NashvilleHousing b
   on a.ParcelID=b.ParcelID
