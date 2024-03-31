@@ -25,8 +25,9 @@ from PortfolioProject..NashvilleHousing
 Order by ParcelID
 
 
-select a.ParcelID, a.PropertyAddress, b.ParcelID,b.PropertyAddress
+select a.ParcelID, a.PropertyAddress, b.ParcelID,b.PropertyAddress, isnull( a.PropertyAddress,b.PropertyAddress)
 from PortfolioProject..NashvilleHousing a
 join PortfolioProject..NashvilleHousing b
   on a.ParcelID=b.ParcelID
-  and a.[UniqueID ]<> b.[UniqueID ]
+  and a.[UniqueID ]<>b.[UniqueID ]
+  where a.PropertyAddress is null
